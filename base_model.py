@@ -2,7 +2,7 @@ import streamlit as st
 from openai import OpenAI
 
 # Set OpenAI API key from Streamlit secrets
-client = OpenAI(api_key=st.secrets["openai"]["api_key"])
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 st.title("Movie Rating Predictor")
 movie_summary = st.text_area("Movie Summary", height=200)
