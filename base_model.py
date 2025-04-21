@@ -1,14 +1,16 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 
 # Set OpenAI API key from Streamlit secrets
-openai.api_key = st.secrets["openai"]["api_key"]
+client = OpenAI(api_key=st.secrets["openai"]["api_key"])
 
 st.title("Movie Rating Predictor")
 movie_summary = st.text_area("Movie Summary", height=200)
-if movie_summary:
+submit_button = st.button("Predict Rating")
+
+if movie_summary and submit_button:
     # Query from an LLM, where the user prompt is the movie summary
-    response = openai.chat.completions.create(
+    response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a movie critic who specializes in predicting IMDb ratings. Based on the movie summary, predict an IMDb rating between 1.0 and 10.0."},
