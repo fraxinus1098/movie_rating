@@ -1,6 +1,9 @@
 import streamlit as st
 import openai
 
+# Set OpenAI API key from Streamlit secrets
+openai.api_key = st.secrets["openai"]["api_key"]
+
 st.title("Movie Rating Predictor")
 movie_summary = st.text_area("Movie Summary", height=200)
 if movie_summary:
